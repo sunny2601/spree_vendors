@@ -5,3 +5,21 @@
   br.clear/
 h1 Vendors
 h4 This is where you manage your vendors
+
+table.index data-hook="vendors_table"
+  thead
+    tr
+      th Name            
+      th Available At
+      th
+  tbody
+    - @vendors.each do |vendor|
+      tr data-hook="vendors_row" id=spree_dom_id(vendor) 
+        td
+          = vendor.name
+        td
+          = vendor.available_at
+        td
+          = link_to Spree.t("actions.edit"), edit_admin_vendor_url(vendor)
+          = "&nbsp;".html_safe
+          = link_to Spree.t("actions.delete"), admin_vendor_url(vendor), :method => :delete, :confirm => 'Are you sure'

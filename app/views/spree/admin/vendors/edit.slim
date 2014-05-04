@@ -1,0 +1,8 @@
+h1 Editing Vendor
+
+= semantic_form_for(@vendor, :url => admin_vendor_url(@vendor), :html => { :multipart => true, :method => :put } ) do |f|
+  = render :partial => 'form', :locals => { :f => f }
+  p
+    = submit_tag Spree.t("update")
+    | or
+    = link_to Spree.t("cancel"), admin_vendors_url
