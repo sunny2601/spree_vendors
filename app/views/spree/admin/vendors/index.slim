@@ -9,7 +9,8 @@ h4 This is where you manage your vendors
 table.index data-hook="vendors_table"
   thead
     tr
-      th Name            
+      th Name        
+      th Logo    
       th Available At
       th
   tbody
@@ -17,6 +18,8 @@ table.index data-hook="vendors_table"
       tr data-hook="vendors_row" id=spree_dom_id(vendor) 
         td
           = vendor.name
+        td
+          = image_tag vendor.logo.url(:small) if vendor.logo.exists?
         td
           = vendor.available_at
         td

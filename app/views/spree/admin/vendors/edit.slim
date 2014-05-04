@@ -6,3 +6,12 @@ h1 Editing Vendor
     = submit_tag Spree.t("update")
     | or
     = link_to Spree.t("cancel"), admin_vendors_url
+
+#vendor-images
+  h2= "Existing Images" if @vendor.vendor_images
+  ul.unstyled
+    - @vendor.vendor_images.each do |vendor_image|
+      - unless vendor_image.new_record?
+        li
+          = image_tag vendor_image.image.url(:small), height: 100
+          = link_to "(Delete)", delete_vendor_image_admin_vendor_url(@vendor, image: vendor_image)    
