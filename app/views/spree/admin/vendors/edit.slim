@@ -2,6 +2,14 @@ h1 Editing Vendor
 
 = semantic_form_for(@vendor, :url => admin_vendor_url(@vendor), :html => { :multipart => true, :method => :put } ) do |f|
   = render :partial => 'form', :locals => { :f => f }
+  
+  h1 Products
+
+  div class="field alpha omega eight columns products_rule_products"
+    = label_tag "vendor_products_product_ids_string", Spree.t('product_rule.choose_products')
+    = hidden_field_tag "vendor_products[product_ids_string]", [@vendor.vendor_products.map{|i|i.product_id}.join(',')], :class => "product_picker fullwidth"
+
+  .clear
   p
     = submit_tag Spree.t("update")
     | or
@@ -15,3 +23,4 @@ h1 Editing Vendor
         li
           = image_tag vendor_image.image.url(:small), height: 100
           = link_to "(Delete)", delete_vendor_image_admin_vendor_url(@vendor, image: vendor_image)    
+
