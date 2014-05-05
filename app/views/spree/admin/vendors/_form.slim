@@ -1,8 +1,8 @@
 = render :partial => 'spree/shared/error_messages', :locals => { :target => @vendor }
 = f.input :name
 = f.input :description
-= f.input :available_at
 = f.input :logo, as: :file
+= f.input :available_at, as: :string, value: datepicker_field_value(@vendor.available_at), input_html: { class: 'datepicker datepicker-op' }
 
 = f.semantic_fields_for :vendor_images do |vendor_image|
   - if vendor_image.object.new_record?
