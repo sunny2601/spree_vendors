@@ -5,6 +5,11 @@ h1 Editing Vendor
   
   h1 Products
 
+  div class="field alpha omega eight columns vendors_taxons"
+    = label_tag "vendor_taxons_taxon_ids", Spree.t('product_rule.taxonomy')
+    = hidden_field_tag "vendor_taxons[taxon_ids_string]", [@vendor.vendor_taxons.map{|i|i.taxon_id}.join(',')], :class => "fullwidth"
+
+  
   div class="field alpha omega eight columns products_rule_products"
     = label_tag "vendor_products_product_ids_string", Spree.t('product_rule.choose_products')
     = hidden_field_tag "vendor_products[product_ids_string]", [@vendor.vendor_products.map{|i|i.product_id}.join(',')], :class => "product_picker fullwidth"
