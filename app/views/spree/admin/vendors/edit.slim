@@ -1,32 +1,22 @@
-h1 Editing Vendor
+- content_for :page_title do
+  = Spree.t(:editing_vendor)
 
-= semantic_form_for(@vendor, :url => admin_vendor_url(@vendor), :html => { :multipart => true, :method => :put } ) do |f|
+- content_for :page_actions do
+  li= button_link_to Spree.t(:back_to_vendors_list), admin_vendors_path, :icon => 'arrow-left'
+
+= form_for [:admin, @vendor], :method => :put, :html => { :multipart => true } do |f|  
   = render :partial => 'form', :locals => { :f => f }
   
-  h1 Taxonomy
-  div class="field alpha omega eight columns vendors_taxons"
-    = label_tag "vendor_taxons_taxon_ids", Spree.t('product_rule.taxonomy')
-    = hidden_field_tag "vendor_taxons[taxon_ids_string]", [@vendor.vendor_taxons.map{|i|i.taxon_id}.join(',')], :class => "fullwidth"
+  div class="right eight columns omega" data-hook="admin_vendor_images_right"    
+    fieldset class="no-border-bottom"
+      legend class='center' Existing Images         
+      - @vendor.vendor_images.each do |vendor_image|
+        - unless vendor_image.new_record?
+          div.eight.columns
+            = image_tag vendor_image.image.url(:small), height: 100
+            = link_to "(Delete)", delete_vendor_image_admin_vendor_url(@vendor, image: vendor_image)    
 
   .clear
-  
-  h1 Products  
-  div class="field alpha omega eight columns products_rule_products"
-    = label_tag "vendor_products_product_ids_string", Spree.t('product_rule.choose_products')
-    = hidden_field_tag "vendor_products[product_ids_string]", [@vendor.vendor_products.map{|i|i.product_id}.join(',')], :class => "product_picker fullwidth"
+  = render :partial => 'spree/admin/shared/edit_resource_links'
 
-  .clear
-  p
-    = submit_tag Spree.t("update")
-    | or
-    = link_to Spree.t("cancel"), admin_vendors_url
-
-#vendor-images
-  h2= "Existing Images" if @vendor.vendor_images
-  ul.unstyled
-    - @vendor.vendor_images.each do |vendor_image|
-      - unless vendor_image.new_record?
-        li
-          = image_tag vendor_image.image.url(:small), height: 100
-          = link_to "(Delete)", delete_vendor_image_admin_vendor_url(@vendor, image: vendor_image)    
-
+.clear

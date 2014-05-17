@@ -2,8 +2,8 @@ module Spree
   module Admin
     class VendorsController < ResourceController
 
-     after_filter :save_vendor_products, only: [:update]
-     after_filter :save_vendor_taxons, only: [:update]
+     after_filter :save_vendor_products, only: [:create, :update]
+     after_filter :save_vendor_taxons, only: [:create, :update]
 
      def new
         @vendor.vendor_images.build

@@ -1,9 +1,10 @@
-h1 New Vendor
+- content_for :page_title do
+  = Spree.t(:new_vendor)
 
-= semantic_form_for(@vendor, :url => admin_vendors_url, :html => { :multipart => true }) do |f|
+- content_for :page_actions do
+  li= button_link_to Spree.t(:back_to_vendors_list), admin_vendors_path, :icon => 'arrow-left'
 
+= form_for [:admin, @vendor], :html => { :multipart => true } do |f|
   = render :partial => 'form', :locals => { :f => f }
-  p
-    = submit_tag Spree.t('actions.create')
-    | or
-    = link_to Spree.t('actions.cancel'), admin_vendors_url
+  .clear
+  = render :partial => 'spree/admin/shared/new_resource_links'

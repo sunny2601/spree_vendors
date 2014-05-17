@@ -1,31 +1,33 @@
-.toolbar
-  ul.actions
-    li
-      = button_link_to 'New Vendor', spree.new_admin_vendor_path, :icon => 'add'
-  br.clear/
-h1 Vendors
-h4 This is where you manage your vendors
+- content_for :page_title do
+  = Spree.t(:vendors)
 
-table.index data-hook="vendors_table"
-  thead
-    tr
-      th Name      
-      th Taxonomy  
-      th Logo    
-      th Available At
-      th
-  tbody
-    - @vendors.each do |vendor|
-      tr data-hook="vendors_row" id=spree_dom_id(vendor) 
-        td
-          = vendor.name
-        td
-          = vendor.vendor_taxons.map{|i|i.taxon.name}.join(',')
-        td
-          = image_tag vendor.logo.url(:small) if vendor.logo.exists?
-        td
-          = vendor.available_at
-        td
-          = link_to Spree.t("actions.edit"), edit_admin_vendor_url(vendor)
-          = "&nbsp;".html_safe
-          = link_to Spree.t("actions.delete"), admin_vendor_url(vendor), :method => :delete, :confirm => 'Are you sure'
+- content_for :page_actions do
+  li= button_link_to 'New Vendor', spree.new_admin_vendor_path, :icon => 'add'
+
+- if @vendors.any?
+  table.index data-hook="vendors_table"
+    thead
+      tr
+        th Name      
+        th Taxonomy  
+        th Logo    
+        th Available On
+    tbody
+      - @vendors.each do |vendor|
+        tr data-hook="vendors_row" id=spree_dom_id(vendor) 
+          td
+            = vendor.name
+          td
+            = vendor.vendor_taxons.map{|i|i.taxon.name}.join(',')
+          td
+            = image_tag vendor.logo.url(:small) if vendor.logo.exists?
+          td
+            = vendor.available_at
+          td.actions
+            =link_to_edit vendor, :no_text => true
+            =link_to_delete vendor, :no_text => true       
+- else
+  .alpha.twelve.columns.no-objects-found
+    = Spree.t(:no_vendors_found)
+    br
+    = link_to Spree.t(:add_one), spree.new_admin_vendor_path

@@ -1,11 +1,32 @@
 = render :partial => 'spree/shared/error_messages', :locals => { :target => @vendor }
-= f.input :name
-= f.input :description
-= f.input :logo, as: :file
-= f.input :available_at, as: :string, value: datepicker_field_value(@vendor.available_at), input_html: { class: 'datepicker datepicker-op' }
 
-= f.semantic_fields_for :vendor_images do |vendor_image|
-  - if vendor_image.object.new_record?
-    = vendor_image.input :image, as: :file
+div data-hook="admin_product_form_fields"  
+  div class="left eight columns alpha" data-hook="admin_product_form_left"    
+    = f.field_container :name do
+      = f.label :name, raw(Spree.t(:name) + content_tag(:span, ' *', :class => 'required'))
+      = f.text_field :name, :class => 'fullwidth title'
+      = f.error_message_on :name
+
+    = f.field_container :description do
+      = f.label :description, Spree.t(:description)
+      = f.text_area :description, {:rows => '13', :class => 'fullwidth'}
+      = f.error_message_on :description
+
+    = f.field_container :available_at do
+      = f.label :available_at, Spree.t(:available_on)
+      = f.error_message_on :available_at
+      = f.text_field :available_at, :value => datepicker_field_value(@vendor.available_at), :class => 'datepicker datepicker-op'
+
+    = f.field_container :logo do
+      = f.label :logo, Spree.t(:logo)
+      = f.file_field :logo
+      = f.error_message_on :logo
 
 
+    div class="field alpha omega eight columns vendors_taxons"
+      = label_tag "vendor_taxons_taxon_ids", Spree.t('product_rule.taxonomy')
+      = hidden_field_tag "vendor_taxons[taxon_ids_string]", [@vendor.vendor_taxons.map{|i|i.taxon_id}.join(',')], :class => "fullwidth"
+
+    div class="field alpha omega eight columns products_rule_products"
+      = label_tag "vendor_products_product_ids_string", Spree.t('product_rule.choose_products')
+      = hidden_field_tag "vendor_products[product_ids_string]", [@vendor.vendor_products.map{|i|i.product_id}.join(',')], :class => "product_picker fullwidth"
