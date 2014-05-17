@@ -2,14 +2,14 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_vendors'
-  s.version     = '2.1.4'
+  s.version     = '1.0.0'
   s.summary     = 'Allows you to create and manage vendors'
   s.description = 'Lets you manage and sell vendor specific products on your site'
   s.required_ruby_version = '>= 1.9.3'
 
-  # s.author    = 'You'
-  # s.email     = 'you@example.com'
-  # s.homepage  = 'http://www.spreecommerce.com'
+  s.author    = 'David Ang'
+  s.email     = 'david@godynamo.com'
+  s.homepage  = 'http://www.godynamo.com'
 
   #s.files       = `git ls-files`.split("\n")
   #s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
