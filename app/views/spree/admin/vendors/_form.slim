@@ -22,6 +22,10 @@ div data-hook="admin_product_form_fields"
       = f.file_field :logo
       = f.error_message_on :logo
 
+    = f.field_container :feature do
+      = f.label :feature, Spree.t(:feature)
+      = f.check_box :feature
+      = f.error_message_on :feature
 
     div class="field alpha omega eight columns vendors_taxons"
       = label_tag "vendor_taxons_taxon_ids", Spree.t('product_rule.taxonomy')

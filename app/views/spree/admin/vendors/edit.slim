@@ -16,6 +16,14 @@
             = image_tag vendor_image.image.url(:small), height: 100
             = link_to "(Delete)", delete_vendor_image_admin_vendor_url(@vendor, image: vendor_image)    
 
+      = f.fields_for :vendor_images do |vendor_image|
+        - if vendor_image.object.new_record?
+          br
+          = f.field_container :vendor_images do
+            = vendor_image.label :image, 'Upload additional image'
+            br
+            = vendor_image.file_field :image
+
   .clear
   = render :partial => 'spree/admin/shared/edit_resource_links'
 

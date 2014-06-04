@@ -12,6 +12,7 @@
         th Taxonomy  
         th Logo    
         th Available On
+        th Featured
     tbody
       - @vendors.each do |vendor|
         tr data-hook="vendors_row" id=spree_dom_id(vendor) 
@@ -23,6 +24,8 @@
             = image_tag vendor.logo.url(:small) if vendor.logo.exists?
           td
             = vendor.available_at
+          td
+            = vendor.featured? ? 'Yes' : 'No'
           td.actions
             =link_to_edit vendor, :no_text => true
             =link_to_delete vendor, :no_text => true       
