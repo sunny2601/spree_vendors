@@ -13,12 +13,21 @@ module Spree
     accepts_nested_attributes_for :vendor_products, :allow_destroy => true
     accepts_nested_attributes_for :vendor_taxons, :allow_destroy => true
 
+    alias_method :products, :vendor_products
+    alias_method :images, :vendor_images
+    alias_method :taxons, :vendor_taxons
+
     def featured?
         self.feature
     end
 
     def self.featured
-        ::Spree::Vendor.where(feature: true).first
+      ::Spree::Vendor.where(feature: true).first
     end
+
+    def feature_image
+      self.images.first.image.url
+    end
+
   end
 end
