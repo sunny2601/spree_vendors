@@ -1,4 +1,6 @@
 Spree::Core::Engine.routes.draw do
+  resources :vendors
+  
   # Add your extension routes here
   namespace :admin do
     resources :vendors do
