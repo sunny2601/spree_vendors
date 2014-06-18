@@ -37,6 +37,21 @@ div data-hook="admin_product_form_fields"
       = f.check_box :feature
       = f.error_message_on :feature
 
+    = f.field_container :author do
+      = f.label :author, raw(Spree.t(:author))
+      = f.text_field :author, :class => 'fullwidth title'
+      = f.error_message_on :author
+
+    = f.field_container :author_description do
+      = f.label :author_description, Spree.t(:author_description)
+      = f.text_area :author_description, {:rows => '13', :class => 'fullwidth'}
+      = f.error_message_on :author_description
+
+    = f.field_container :quote do
+      = f.label :quote, Spree.t(:quote)
+      = f.text_area :quote, {:rows => '13', :class => 'fullwidth'}
+      = f.error_message_on :quote
+
     div class="field alpha omega eight columns vendors_taxons"
       = label_tag "vendor_taxons_taxon_ids", Spree.t('product_rule.taxonomy')
       = hidden_field_tag "vendor_taxons[taxon_ids_string]", [@vendor.vendor_taxons.map{|i|i.taxon_id}.join(',')], :class => "fullwidth"
