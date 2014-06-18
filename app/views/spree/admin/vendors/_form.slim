@@ -17,6 +17,11 @@ div data-hook="admin_product_form_fields"
       = f.text_field :location, :class => 'fullwidth title'
       = f.error_message_on :location
 
+    = f.field_container :tagline do
+      = f.label :tagline, raw(Spree.t(:tagline))
+      = f.text_field :tagline, :class => 'fullwidth title'
+      = f.error_message_on :tagline
+
     = f.field_container :available_at do
       = f.label :available_at, Spree.t(:available_on)
       = f.error_message_on :available_at
