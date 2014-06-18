@@ -1,5 +1,8 @@
 module Spree
   class Vendor < ActiveRecord::Base
+    extend FriendlyId
+    friendly_id :name, use: :finders
+
     has_many :vendor_images, :dependent => :destroy
     has_many :vendor_products, :dependent => :destroy
     has_many :vendor_taxons, :dependent => :destroy
