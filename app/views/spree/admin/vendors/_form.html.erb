@@ -1,0 +1,76 @@
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @vendor } %>
+
+<div data-hook="admin_product_form_fields">  
+  <div class="left eight columns alpha" data-hook="admin_product_form_left">    
+    <%= f.field_container :name do %>
+      <%= f.label :name, raw(Spree.t(:name) + content_tag(:span, ' *', :class => 'required')) %>
+      <%= f.text_field :name, :class => 'fullwidth title' %>
+      <%= f.error_message_on :name %>
+    <% end %>
+
+    <%= f.field_container :description do %>
+      <%= f.label :description, Spree.t(:description) %>
+      <%= f.text_area :description, {:rows => '13', :class => 'fullwidth'} %>
+      <%= f.error_message_on :description %>
+    <% end %>
+
+    <%= f.field_container :location do %>
+      <%= f.label :location, raw(Spree.t(:location)) %>
+      <%= f.text_field :location, :class => 'fullwidth title' %>
+      <%= f.error_message_on :location %>
+    <% end %>
+
+    <%= f.field_container :tagline do %>
+      <%= f.label :tagline, raw(Spree.t(:tagline)) %>
+      <%= f.text_field :tagline, :class => 'fullwidth title' %>
+      <%= f.error_message_on :tagline %>
+    <% end %>
+
+    <%= f.field_container :available_at do %>
+      <%= f.label :available_at, Spree.t(:available_on) %>
+      <%= f.error_message_on :available_at %>
+      <%= f.text_field :available_at, :value => datepicker_field_value(@vendor.available_at), :class => 'datepicker datepicker-op' %>
+    <% end %>
+
+    <%= f.field_container :logo do %>
+      <%= f.label :logo, Spree.t(:logo) %>
+      <%= f.file_field :logo %>
+      <%= f.error_message_on :logo %>
+    <% end %>
+
+
+    <%= f.field_container :feature do %>
+      <%= f.label :feature, Spree.t(:feature) %>
+      <%= f.check_box :feature %>
+      <%= f.error_message_on :feature %>
+    <% end %>
+
+    <%= f.field_container :author do %>
+      <%= f.label :author, raw(Spree.t(:author)) %>
+      <%= f.text_field :author, :class => 'fullwidth title' %>
+      <%= f.error_message_on :author %>
+    <% end %>
+
+    <%= f.field_container :author_description do %>
+      <%= f.label :author_description, Spree.t(:author_description) %>
+      <%= f.text_area :author_description, {:rows => '13', :class => 'fullwidth'} %>
+      <%= f.error_message_on :author_description %>
+    <% end %>
+
+    <%= f.field_container :quote do %>
+      <%= f.label :quote, Spree.t(:quote) %>
+      <%= f.text_area :quote, {:rows => '13', :class => 'fullwidth'} %>
+      <%= f.error_message_on :quote %>
+    <% end %>
+
+    <div class="field alpha omega eight columns vendors_taxons">
+      <%= label_tag "vendor_taxons_taxon_ids", Spree.t('product_rule.taxonomy') %>
+      <%= hidden_field_tag "vendor_taxons[taxon_ids_string]", [@vendor.vendor_taxons.map{|i|i.taxon_id}.join(',')], :class => "fullwidth" %>
+    </div>
+    <div class="field alpha omega eight columns products_rule_products">
+      <%= label_tag "vendor_products_product_ids_string", Spree.t('product_rule.choose_products') %>
+      <%= hidden_field_tag "vendor_products[product_ids_string]", [@vendor.vendor_products.map{|i|i.product_id}.join(',')], :class => "product_picker fullwidth"
+  %>
+    </div>
+  </div>
+</div>
