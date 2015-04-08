@@ -1,10 +1,11 @@
-- content_for :page_title do
-  = Spree.t(:new_vendor)
-
-- content_for :page_actions do
+<% content_for :page_title do %>
+  <%= Spree.t(:new_vendor) %>
+<% end %>
+<% content_for :page_actions do %>
   li= button_link_to Spree.t(:back_to_vendors_list), admin_vendors_path, :icon => 'arrow-left'
-
-= form_for [:admin, @vendor], :html => { :multipart => true } do |f|
-  = render :partial => 'form', :locals => { :f => f }
-  .clear
-  = render :partial => 'spree/admin/shared/new_resource_links'
+<% end %>
+<%= form_for [:admin, @vendor], :html => { :multipart => true } do |f| %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <div class="clear"></div>
+  <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+<% end %>
